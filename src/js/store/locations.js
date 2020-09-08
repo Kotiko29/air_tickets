@@ -33,8 +33,9 @@ class Locations {
   serializeCities(cities) {
     // { 'city name, country name': { ... } }
     return cities.reduce((acc, city) => {
-      const country_name = this.getCitiesByCountryCode(city.country_code);
-      const key = `${city.name}, ${country_name}`;
+      const country_name = this.getCountryNameByCode(city.country_code);
+      const city_name = city.name ? city.name : city.name_translations.en;
+      const key = `${city_name}, ${country_name}`;
       acc[key] = city;
       return acc;
     }, {});
